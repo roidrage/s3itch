@@ -8,7 +8,7 @@ require 'mime/types'
 class S3itchApp < Sinatra::Base
   put '/:name' do
     retries = 0
-    s3 = Fog::Storage.new(provider: 'AWS', aws_access_key_id: ENV['AWS_ACCESS_KEY_ID'], aws_secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'], region: 'eu-west-1')
+    s3 = Fog::Storage.new(provider: 'AWS', aws_access_key_id: ENV['AWS_ACCESS_KEY_ID'], aws_secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'], region: ENV['AWS_REGION'])
     begin
       directory = s3.directories.get(ENV['S3_BUCKET'])
       content_type = MIME::Types.type_for(params[:name]).first.content_type
