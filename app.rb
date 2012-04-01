@@ -28,7 +28,7 @@ class S3itchApp < Sinatra::Base
   end
 
   delete '/:name' do
-    file = bucket.files.find(params[:name])
+    file = bucket.files.get(params[:name])
     file.destroy
   end
 
