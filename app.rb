@@ -12,7 +12,7 @@ class S3itchApp < Sinatra::Base
     begin
       directory = s3.directories.get(ENV['S3_BUCKET'])
       content_type = MIME::Types.type_for(params[:name]).first.content_type
-      file = directory.files.create(key: params[:name], public: true, body: request.body, content_type: content_type)
+      file = directory.files.create(key: params[:name], public: true, body: request.body.read, content_type: content_type)
       puts "Uploaded file #{params[:name]} to S3"
       redirect "http://#{ENV['S3_BUCKET']}/#{params[:name]}", 201
     rescue => e
