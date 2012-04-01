@@ -10,7 +10,8 @@ Installation
 
 The app assumes you're storing files in a bucket that has a CNAME attached to
 it, e.g. s3itch.mydomain.com, and that you're setting this CNAME as base URL in
-Skitch.
+Skitch. Skitch sends a HEAD request to the base URL (your S3 bucket) after
+uploading to check if the file was properly stored. 
 
 It's made for deployment on Heroku:
 
