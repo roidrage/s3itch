@@ -21,5 +21,7 @@ It's made for deployment on Heroku:
   `S3_BUCKET` for the Heroku app
 * Configure Skitch with the bucket and the URL of the Heroku app:
   ![Skitch Configuration](http://s3itch.paperplanes.de/Preferences-20120401-174030.png)
+  By the way, this picture was uploaded using this bridge and is hosted on S3.
+  Did that just blow your mind?
 
 Done!
