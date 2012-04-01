@@ -26,4 +26,14 @@ It's made for deployment on Heroku:
   By the way, this picture was uploaded using this bridge and is hosted on S3.
   Did that just blow your mind?
 
+Using
+=====
+
+Take screenshot, annotate whimsically, upload, done.
+
+Skitch generates a new name for every upload that includes the timestamp and has
+the full URL to the file ready for you to copy to the clipboard. Unfortunately
+the WebDAV export doesn't copy that automatically, but after sharing, the "Share"
+button turns into a "Copy" button.
+
 Done!
