@@ -6,6 +6,14 @@ require 'fog'
 require 'mime/types'
 
 class S3itchApp < Sinatra::Base
+
+  configure do
+    if ENV['HTTP_USER'] && ENV['HTTP_PASS']
+      use Rack::Auth::Basic, "Restricted Area" do |username, password|
+        [username, password] == [ENV['HTTP_USER'], ENV['HTTP_PASS']]
+      end
+    end
+  end
   # When Skitch uploads via WebDAV, it uses
   # the file name as the URL and includes the
   # image in the body.
