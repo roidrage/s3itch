@@ -15,7 +15,7 @@ uploading to check if the file was properly stored.
 
 It's made for deployment on Heroku:
 
-* `git clone git://github.com:mattmatt/s3itch.git`
+* `git clone git://github.com/mattmatt/s3itch.git`
 * `heroku create --stack cedar`
 * `git push heroku master`
 * Set environment variables `AWS_REGION` (e.g. eu-west-1), `AWS_ACCESS_KEY_ID`,
