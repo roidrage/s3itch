@@ -5,6 +5,11 @@ As Skitch will soon shut down their own hosting and [switch to
 Evernote](http://blog.evernote.com/2012/03/19/skitch-for-mac-gets-sharing-through-evernote/),
 the only reasonable thing to do is to use WebDAV instead and put files on S3.
 
+**Note** that this app does not work with Skitch 2.0, which removed any sharing
+options other than Evernote. It works with Skitch 1.0.x only, the latest version
+of which (v1.0.12) you can [still
+download](http://www.macupdate.com/download/39932/skitch.zip), AppStore-free.
+
 Installation
 ============
 
