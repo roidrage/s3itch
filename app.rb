@@ -21,7 +21,13 @@ class S3itchApp < Sinatra::Base
     retries = 0
     begin
       content_type = MIME::Types.type_for(params[:name]).first.content_type
-      file = bucket.files.create(key: params[:name], public: true, body: request.body.read, content_type: content_type)
+      file = bucket.files.create({
+        key: params[:name],
+        public: true,
+        body: request.body.read,
+        content_type: content_type,
+        metadata: { "Cache-Control" => 'public, max-age=315360000'}
+      })
       puts "Uploaded file #{params[:name]} to S3"
       redirect "http://#{ENV['S3_BUCKET']}/#{params[:name]}", 201
     rescue => e
