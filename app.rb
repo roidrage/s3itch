@@ -20,9 +20,16 @@ class S3itchApp < Sinatra::Base
   put '/:name' do
     retries = 0
     begin
-      content_type = MIME::Types.type_for(params[:name]).first.content_type
+      # Skitch does not encode question marks, so we have to recombine the
+      # name here if necessary
+      name = request.query_string ? 
+        "#{params[:name]}?#{request.query_string}"
+      else
+        params[:name]
+      end
+      content_type = MIME::Types.type_for(name).first.content_type
       file = bucket.files.create({
-        key: params[:name],
+        key: name,
         public: true,
         body: request.body.read,
         content_type: content_type,
