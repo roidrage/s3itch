@@ -22,7 +22,7 @@ class S3itchApp < Sinatra::Base
     begin
       # Skitch does not encode question marks, so we have to recombine the
       # name here if necessary
-      name = request.query_string ? 
+      name = if request.query_string
         "#{params[:name]}?#{request.query_string}"
       else
         params[:name]
