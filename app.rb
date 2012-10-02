@@ -27,7 +27,11 @@ class S3itchApp < Sinatra::Base
       else
         params[:name]
       end
-      content_type = MIME::Types.type_for(name).first.content_type
+      content_type = if MIME::Types.type_for(name).any?
+        MIME::Types.type_for(name).first.content_type
+      else
+        "application/octet-stream"
+      end
       file = bucket.files.create({
         key: params[:name],
         public: true,
