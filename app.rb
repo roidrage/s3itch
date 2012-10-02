@@ -4,6 +4,7 @@ Bundler.setup
 require 'sinatra'
 require 'fog'
 require 'mime/types'
+require 'uri'
 
 class S3itchApp < Sinatra::Base
 
@@ -33,16 +34,16 @@ class S3itchApp < Sinatra::Base
         "application/octet-stream"
       end
       file = bucket.files.create({
-        key: params[:name],
+        key: name,
         public: true,
         body: request.body.read,
         content_type: content_type,
         metadata: { "Cache-Control" => 'public, max-age=315360000'}
       })
-      puts "Uploaded file #{params[:name]} to S3"
-      redirect "http://#{ENV['S3_BUCKET']}/#{params[:name]}", 201
+      puts "Uploaded file #{name} to S3"
+      redirect "http://#{ENV['S3_BUCKET']}/#{URI.escape(name)}", 201
     rescue => e
-      puts "Error uploading file #{params[:name]} to S3: #{e.message}"
+      puts "Error uploading file #{name} to S3: #{e.message}"
       if e.message =~ /Broken pipe/ && retries < 5
         retries += 1
         retry
