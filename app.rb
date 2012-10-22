@@ -35,7 +35,8 @@ class S3itchApp < Sinatra::Base
         content_type: content_type,
         metadata: { "Cache-Control" => 'public, max-age=315360000'}
       })
-      return "<mediaurl>http://#{file.public_url}</mediaurl>"
+      puts "Uploaded file #{file.key} to S3"
+      return "<mediaurl>http://#{ENV['S3_BUCKET']}/#{file.key}</mediaurl>"
     rescue => e
       puts "Error uploading file #{media[:name]} to S3: #{e.message}"
       if e.message =~ /Broken pipe/ && retries < 5
