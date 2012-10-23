@@ -65,6 +65,9 @@ class S3itchApp < Sinatra::Base
       else
         params[:name]
       end
+
+      name << "##{request.env["FRAGMENT"]}" if request.env["FRAGMENT"]
+
       content_type = if MIME::Types.type_for(name).any?
         MIME::Types.type_for(name).first.content_type
       else
