@@ -39,7 +39,7 @@ class S3itchApp < Sinatra::Base
       if ENV['NO_CNAME']
         return "<mediaurl>#{file.public_url}</mediaurl>"
       else
-        return "<mediaurl>#{ENV['S3_BUCKET']}/#{file.key}</mediaurl>"
+        return "<mediaurl>http://#{ENV['S3_BUCKET']}/#{file.key}</mediaurl>"
       end
     rescue => e
       puts "Error uploading file #{media[:name]} to S3: #{e.message}"
@@ -84,7 +84,7 @@ class S3itchApp < Sinatra::Base
       if ENV['NO_CNAME']
         redirect "#{file.public_url}", 201
       else
-        redirect "#{ENV['S3_BUCKET']}/#{file.key}", 201
+        redirect "http://#{ENV['S3_BUCKET']}/#{file.key}", 201
       end
     rescue => e
       puts "Error uploading file #{name} to S3: #{e.message}"
