@@ -4,6 +4,7 @@ Bundler.setup
 require 'sinatra'
 require 'fog'
 require 'mime/types'
+require 'uri'
 
 SIXTYTWO = ('0'..'9').to_a + ('a'..'z').to_a + ('A'..'Z').to_a
 
@@ -38,7 +39,7 @@ class S3itchApp < Sinatra::Base
       if ENV['NO_CNAME']
         return "<mediaurl>#{file.public_url}</mediaurl>"
       else
-        return "<mediaurl>#{ENV['S3_BUCKET']}/#{file.key}</mediaurl>"
+        return "<mediaurl>http://#{ENV['S3_BUCKET']}/#{file.key}</mediaurl>"
       end
     rescue => e
       puts "Error uploading file #{media[:name]} to S3: #{e.message}"
@@ -64,22 +65,29 @@ class S3itchApp < Sinatra::Base
       else
         params[:name]
       end
-      content_type = MIME::Types.type_for(name).first.content_type
+
+      name << "##{request.env["FRAGMENT"]}" if request.env["FRAGMENT"]
+
+      content_type = if MIME::Types.type_for(name).any?
+        MIME::Types.type_for(name).first.content_type
+      else
+        "application/octet-stream"
+      end
       file = bucket.files.create({
-        key: params[:name],
+        key: name,
         public: true,
         body: request.body.read,
         content_type: content_type,
         metadata: { "Cache-Control" => 'public, max-age=315360000'}
       })
-      puts "Uploaded file #{params[:name]} to S3"
+      puts "Uploaded file #{file.key} to S3"
       if ENV['NO_CNAME']
         redirect "#{file.public_url}", 201
       else
-        redirect "#{ENV['S3_BUCKET']}/#{file.key}", 201
+        redirect "http://#{ENV['S3_BUCKET']}/#{file.key}", 201
       end
     rescue => e
-      puts "Error uploading file #{params[:name]} to S3: #{e.message}"
+      puts "Error uploading file #{name} to S3: #{e.message}"
       if e.message =~ /Broken pipe/ && retries < 5
         retries += 1
         retry
