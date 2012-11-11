@@ -22,6 +22,7 @@ and can be disabled.
 It's made for deployment on Heroku:
 
 * `git clone git://github.com/roidrage/s3itch.git`
+* `cd s3itch`
 * `heroku create --stack cedar`
 * `git push heroku master`
 * Set environment variables `AWS_REGION` (e.g. eu-west-1), `AWS_ACCESS_KEY_ID`,
