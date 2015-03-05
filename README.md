@@ -1,14 +1,18 @@
 S3itch - Sharing Skitch (and Tweetbot!) uploads on S3
 ======
 
-As Skitch will soon shut down their own hosting and [switch to
-Evernote](http://blog.evernote.com/2012/03/19/skitch-for-mac-gets-sharing-through-evernote/),
+Since Skitch shut down their own hosting and broke everyone's hearts by [switching
+to Evernote](http://blog.evernote.com/2012/03/19/skitch-for-mac-gets-sharing-through-evernote/),
 the only reasonable thing to do is to use WebDAV instead and put files on S3.
 
 **Note** that this app does not work with Skitch 2.0, which removed any sharing
 options other than Evernote. It works with Skitch 1.0.x only, the latest version
 of which (v1.0.12) you can [still
 download](http://www.macupdate.com/download/39932/skitch.zip), AppStore-free.
+This DOES work with [Monosnap](http://monosnap.com/welcome) (cross-platform, but
+only available for Mac on [the app
+store](https://itunes.apple.com/us/app/monosnap/id540348655?mt=12)), as well as
+[Tweetbot](https://itunes.apple.com/us/app/tweetbot-for-twitter/id557168941?mt=12)
 
 Installation
 ============
@@ -25,6 +29,7 @@ It's made for deployment on Heroku:
 * `cd s3itch`
 * `heroku create --stack cedar`
 * `git push heroku master`
+* alternatively, click this button: [![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy) (make sure to set your ENV variables!)
 * Set environment variables `AWS_REGION` (e.g. eu-west-1), `AWS_ACCESS_KEY_ID`,
   `AWS_SECRET_ACCESS_KEY`, `S3_BUCKET`, `HTTP_USER` and `HTTP_PASS` for the Heroku app
 * If you wish to NOT use a CNAME, also set `NO_CNAME` to `true`
@@ -64,3 +69,10 @@ By the way, that image was tweeted from Tweetbot using s3itch. Here's the proof 
 ![Tweetbot proof](http://s3itch.s3.amazonaws.com/Screen_Shot_2012-10-22_at_11.17.24_AM-20121022-111803.jpg)
 
 If I had any mind left, it would be double-blown.
+
+Monosnap
+--------
+Same settings as Skitch above:
+![](http://snaps.akibraun.com/7ztji.png)
+
+(while yes, S3 is an option for Monosnap, sometimes getting it set up can be a headache)

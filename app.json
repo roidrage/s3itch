@@ -1,0 +1,20 @@
+{
+  "name": "S3itch",
+  "description": "An S3 proxy for Skitch & Tweetbot's WebDAV sharing support",
+  "keywords": [
+    "skitch",
+    "tweetbot",
+    "s3"
+  ],
+  "repository": "https://github.com/roidrage/s3itch",
+  "addons": [],
+  "env": {
+    "AWS_REGION": "us-east-1",
+    "AWS_ACCESS_KEY_ID": "",
+    "AWS_SECRET_ACCESS_KEY": "",
+    "S3_BUCKET": "",
+    "HTTP_USER": "",
+    "HTTP_PASS": "",
+    "NO_CNAME": false
+  }
+}
