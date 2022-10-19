@@ -21,7 +21,7 @@ GEM
     net-scp (1.0.4)
       net-ssh (>= 1.99.1)
     net-ssh (2.3.0)
-    nokogiri (1.5.2)
+    nokogiri (1.5.11)
     rack (1.4.1)
     rack-protection (1.2.0)
       rack
